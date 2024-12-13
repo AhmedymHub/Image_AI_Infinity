@@ -1,0 +1,59 @@
+** Programming Languages:
+Next.js    
+Typescript
+TailwindCSS
+
+✅Next.js is a React-based framework that enables developers to build fast, scalable, and SEO-friendly web applications. 
+It offers powerful features like server-side rendering (SSR), 
+static site generation (SSG), and API routes, making it suitable for modern web development.
+
+✅TypeScript is a superset of JavaScript that adds static typing, interfaces, and other advanced features to enhance the development experience, 
+improve code quality, and make debugging easier. 
+It compiles to plain JavaScript, ensuring compatibility with all JavaScript runtimes.
+
+✅TailwindCSS is a utility-first CSS framework that allows developers to design directly in the markup by using pre-defined classes. 
+This approach provides flexibility, faster development, 
+and better maintainability compared to traditional CSS or component-based frameworks.
+
+Using Next.js with TypeScript provides type safety, 
+improved code quality, and enhanced developer experience when building modern web applications. 
+Next.js is a React-based framework for server-rendered, static, 
+and hybrid web applications, and TypeScript is a superset of JavaScript with static typing.
+
+ ✅ShadCN UI ==> Component library == that leverages Radix UI and Tailwind CSS to provide accessible, customizable, 
+ and pre-built components for modern web development.
+
+ ✅Clerk ==> Authentication(Sign-in, Sign-up)
+
+ ✅Database == MongoDB & Mongoose
+
+ MongoDB is a NoSQL database known for its flexibility, scalability, and ability to handle unstructured or semi-structured data. 
+ Unlike traditional relational databases (e.g., MySQL, PostgreSQL), MongoDB uses a document-oriented model, storing data in JSON-like format called BSON (Binary JSON).
+
+ Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js. 
+ It provides a structured and convenient way to interact with MongoDB by defining schemas and models for your data.
+
+ ✅Stripe ==> technology company that provides a suite of payment processing software 
+ and APIs for online and in-person businesses
+
+ ✅Cloudinary == Cloudinary is a cloud-based service designed for managing, 
+ storing, and delivering media assets such as images and videos. 
+ It provides a rich API for uploading, transforming, optimizing, 
+ and delivering assets in real-time, making it a popular choice for modern web and mobile applications.
+
+ Steps of the project:
+ 
+ — Project Setup ✅
+ — Next.js Routing & folder structure ✅
+ — Clerk Authentication ✅
+ — Layout Sidebar & Mobile Navigation ✅
+ — Database & Models Setup ==> MongoDB and Mongoose ✅
+ — Server Actions & Webhook
+ — Add Image Form (React Hook Form + Zod Validation) Cloudinary Media Uploader
+ — Transformed Image Components
+ — Image Server Action
+ — Homepage + Search & Pagination
+ — Image details, Update & Delete Image
+ — Checkout & Pay with Stripe
+ — Final Deployment & Production fixes
+
