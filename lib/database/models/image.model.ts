@@ -1,4 +1,3 @@
-import { transformationTypes } from "@/constants";
 import { Document, model, models, Schema } from "mongoose";
 
 export interface IImage extends Document {
