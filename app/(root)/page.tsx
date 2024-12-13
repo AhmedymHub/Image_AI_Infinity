@@ -1,5 +1,4 @@
 import { currentUser } from '@clerk/nextjs/server';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 const Home = async () => {
