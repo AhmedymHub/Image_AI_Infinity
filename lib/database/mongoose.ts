@@ -1,4 +1,4 @@
-import { promises } from "fs";
+// import { promise } from "fs";
 import mongoose, {Mongoose} from "mongoose";
 
 const MONGODB_URL = process.env.MONGODB_URL;
