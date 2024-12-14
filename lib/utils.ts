@@ -138,25 +138,29 @@ export const deepMergeObjects = <T extends Record<string, unknown>>(
   obj1: T,
   obj2: T
 ): T => {
-  if (obj2 === null || obj2 === undefined) {
+  if (!obj2) {
     return obj1;
   }
 
-  const output: T = { ...obj2 };
+  const output = { ...obj2 } as T;
 
   for (const key in obj1) {
-    if (obj1.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj1, key)) {
       if (
         obj1[key] &&
         typeof obj1[key] === "object" &&
+        !Array.isArray(obj1[key]) &&
         obj2[key] &&
-        typeof obj2[key] === "object"
+        typeof obj2[key] === "object" &&
+        !Array.isArray(obj2[key])
       ) {
-        output[key] = deepMergeObjects(
+        // Recursively merge nested objects
+        (output as Record<string, unknown>)[key] = deepMergeObjects(
           obj1[key] as Record<string, unknown>,
           obj2[key] as Record<string, unknown>
         );
       } else {
+        // Assign value directly
         output[key] = obj1[key];
       }
     }
@@ -164,3 +168,4 @@ export const deepMergeObjects = <T extends Record<string, unknown>>(
 
   return output;
 };
+
