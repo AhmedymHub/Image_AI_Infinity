@@ -83,29 +83,34 @@ export function removeKeysFromQuery({
 }
 
 // DEBOUNCE
-export const debounce = (func: (...args: any[]) => void, delay: number) => {
+export const debounce = (func: (...args: unknown[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout | null;
-  return (...args: any[]) => {
+  return (...args: unknown[]) => {
     if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(null, args), delay);
+    timeoutId = setTimeout(() => func(...args), delay);
   };
 };
 
-// GE IMAGE SIZE
-export type AspectRatioKey = keyof typeof aspectRatioOptions;
+interface Image {
+  width?: number;
+  height?: number;
+  aspectRatio?: string;
+}
+
 export const getImageSize = (
   type: string,
-  image: any,
+  image: Image,
   dimension: "width" | "height"
 ): number => {
   if (type === "fill") {
     return (
-      aspectRatioOptions[image.aspectRatio as AspectRatioKey]?.[dimension] ||
+      aspectRatioOptions[image.aspectRatio as keyof typeof aspectRatioOptions]?.[dimension] ||
       1000
     );
   }
   return image?.[dimension] || 1000;
 };
+
 
 // DOWNLOAD IMAGE
 export const download = (url: string, filename: string) => {
@@ -129,23 +134,33 @@ export const download = (url: string, filename: string) => {
 };
 
 // DEEP MERGE OBJECTS
-export const deepMergeObjects = (obj1: any, obj2: any) => {
-  if(obj2 === null || obj2 === undefined) {
+export const deepMergeObjects = <T extends Record<string, unknown>>(
+  obj1: T,
+  obj2: T
+): T => {
+  if (!obj2) {
     return obj1;
   }
 
-  let output = { ...obj2 };
+  const output = { ...obj2 } as T;
 
-  for (let key in obj1) {
-    if (obj1.hasOwnProperty(key)) {
+  for (const key in obj1) {
+    if (Object.prototype.hasOwnProperty.call(obj1, key)) {
       if (
         obj1[key] &&
         typeof obj1[key] === "object" &&
+        !Array.isArray(obj1[key]) &&
         obj2[key] &&
-        typeof obj2[key] === "object"
+        typeof obj2[key] === "object" &&
+        !Array.isArray(obj2[key])
       ) {
-        output[key] = deepMergeObjects(obj1[key], obj2[key]);
+        // Recursively merge nested objects
+        (output as Record<string, unknown>)[key] = deepMergeObjects(
+          obj1[key] as Record<string, unknown>,
+          obj2[key] as Record<string, unknown>
+        );
       } else {
+        // Assign value directly
         output[key] = obj1[key];
       }
     }
@@ -153,3 +168,30 @@ export const deepMergeObjects = (obj1: any, obj2: any) => {
 
   return output;
 };
+
+
+// DEEP MERGE OBJECTS << i edited this part of code
+// export const deepMergeObjects = (obj1: any, obj2: any) => {
+//   if(obj2 === null || obj2 === undefined) {
+//     return obj1;
+//   }
+
+//   let output = { ...obj2 };
+
+//   for (let key in obj1) {
+//     if (obj1.hasOwnProperty(key)) {
+//       if (
+//         obj1[key] &&
+//         typeof obj1[key] === "object" &&
+//         obj2[key] &&
+//         typeof obj2[key] === "object"
+//       ) {
+//         output[key] = deepMergeObjects(obj1[key], obj2[key]);
+//       } else {
+//         output[key] = obj1[key];
+//       }
+//     }
+//   }
+
+//   return output;
+// };
