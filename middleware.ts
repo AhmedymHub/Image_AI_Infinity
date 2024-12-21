@@ -6,7 +6,6 @@ export const config = {
   matcher: [
     '/',  // Public route
     '/api/webhooks/clerk',  // Public webhook route
-    '/api/webhooks/stripe',  // Public webhook route
     '/((?!.+\\.[\\w]+$|_next).*)',  // Matches all dynamic routes except static files
     '/(api|trpc)(.*)',  // Apply middleware to API routes
   ],
