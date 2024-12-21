@@ -7,18 +7,10 @@ interface MongooseConnection {
   promise: Promise<Mongoose> | null;
 }
 
-// Augment the global type to include mongoose
-declare global {
-  // eslint-disable-next-line no-var
-  var mongoose: MongooseConnection | undefined;
-}
-
-// Use the global variable to store the cached connection
-let cached: MongooseConnection = global.mongoose || { conn: null, promise: null };
+let cached: MongooseConnection = (global as any).mongoose;
 
 if (!cached) {
-  cached = { conn: null, promise: null };
-  global.mongoose = cached;
+  cached = (global as any).mongoose = { conn: null, promise: null };
 }
 
 export const connectToDatabase = async () => {
@@ -34,6 +26,6 @@ export const connectToDatabase = async () => {
     });
 
   cached.conn = await cached.promise;
-
+  console.log('Connected to MongoDB');
   return cached.conn;
 };
